@@ -1,5 +1,6 @@
 <script setup>
 import UserLayout from "@/layouts/UserLayout.vue";
+import Close from "@/components/icons/Close.vue";
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import UserLayout from "@/layouts/UserLayout.vue";
             <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="" />
           </div>
           <div class="flex-1">
-            <div class="flex flex-col justify-between h-full">
+            <div class="flex relative flex-col justify-between h-full">
 
               <div class="grid grid-cols-2">
                 <div>
@@ -23,10 +24,13 @@ import UserLayout from "@/layouts/UserLayout.vue";
                   <div>100</div>
                 </div>
                 <div>
-                  <select class="select select-bordered w-full max-w-xs">
+                  <select class="w-1/2 p-4">
                     <option v-for="quantity in [1,2,3,4,5]">{{ quantity }}</option>
                     
                   </select>
+                </div>
+                <div class="absolute top-0 right-0">
+                  <Close></Close>
                 </div>
               </div>
               <div><b>in Stock</b></div>
