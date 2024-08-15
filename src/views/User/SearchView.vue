@@ -9,14 +9,10 @@ const route = useRoute();
 const productStore = useProductStore();
 const searchText = ref('');
 
-onMounted(() => {
-  if (route.query.q) {
-    searchText.value = route.query.q;
-  }
-});
+
 watch(()=> route.query.q ,(newSearchText)=>{
   searchText.value = route.query.q;
-})
+},{immediate:true})
 
 const filterProducts =  computed(()=>{
   return productStore.filterProduct(searchText.value)
