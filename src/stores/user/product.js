@@ -22,5 +22,11 @@ export const useProductStore = defineStore('product', {
       },
     ],
     loaded: false,
-  })
+  }),
+  actions: {
+    filterProduct(searchText) {
+      return this.list.filter(product => product.name.includes(searchText));
+    }
+  }
+
 });
