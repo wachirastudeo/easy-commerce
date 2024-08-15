@@ -1,20 +1,28 @@
 <script setup>
-import { ref } from "vue";
-import { RouterLink } from 'vue-router'
-const Islogged = ref(false);
-const login =()=>{
-    Islogged.value = true;
+import { onMounted, ref } from "vue";
+import { RouterLink } from "vue-router";
+const IsloggedIn = ref(false);
+
+onMounted(()=>{
+if(localStorage.getItem('isLoggedIn')){
+    IsloggedIn.value=true
 }
-const logout =()=>{
-    Islogged.value = false;
-}
+});
+
+const login = () => {
+    IsloggedIn.value = true;
+    localStorage.setItem('isLoggedIn',true);
+};
+const logout = () => {
+    IsloggedIn.value = false;
+    localStorage.removeItem('isLoggedIn')
+};
 </script>
 <template>
-
     <div class="container mx-auto">
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <RouterLink :to="{name:'home'}" class="btn btn-ghost normal-case text-xl" >Easy Show</RouterLink>
+                <RouterLink :to="{ name: 'home' }" class="btn btn-ghost normal-case text-xl">Easy Show</RouterLink>
             </div>
 
             <div class="flex-none gap-2">
@@ -43,7 +51,7 @@ const logout =()=>{
                     </div>
                 </div>
 
-                <button v-if="!Islogged" class="btn btn-ghost">Login</button>
+                <button v-if="!IsloggedIn" @click="login()" class="btn btn-ghost">Login</button>
 
                 <div v-else class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -55,39 +63,37 @@ const logout =()=>{
                     <ul tabindex="0"
                         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <li>
-                            <a class="justify-between">
-                                Profile
-                            </a>
+                            <a class="justify-between"> Profile </a>
                         </li>
-                        <li><a>Logout</a></li>
+                        <li><a @click="logout()">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <!-- main content -->
         <slot></slot>
-    <!-- footer -->
+        <!-- footer -->
         <footer class="footer bg-neutral text-neutral-content p-10">
-  <nav>
-    <h6 class="footer-title">Services</h6>
-    <a class="link link-hover">Branding</a>
-    <a class="link link-hover">Design</a>
-    <a class="link link-hover">Marketing</a>
-    <a class="link link-hover">Advertisement</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Company</h6>
-    <a class="link link-hover">About us</a>
-    <a class="link link-hover">Contact</a>
-    <a class="link link-hover">Jobs</a>
-    <a class="link link-hover">Press kit</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Legal</h6>
-    <a class="link link-hover">Terms of use</a>
-    <a class="link link-hover">Privacy policy</a>
-    <a class="link link-hover">Cookie policy</a>
-  </nav>
-</footer>
+            <nav>
+                <h6 class="footer-title">Services</h6>
+                <a class="link link-hover">Branding</a>
+                <a class="link link-hover">Design</a>
+                <a class="link link-hover">Marketing</a>
+                <a class="link link-hover">Advertisement</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Company</h6>
+                <a class="link link-hover">About us</a>
+                <a class="link link-hover">Contact</a>
+                <a class="link link-hover">Jobs</a>
+                <a class="link link-hover">Press kit</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Legal</h6>
+                <a class="link link-hover">Terms of use</a>
+                <a class="link link-hover">Privacy policy</a>
+                <a class="link link-hover">Cookie policy</a>
+            </nav>
+        </footer>
     </div>
 </template>
