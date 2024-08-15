@@ -1,9 +1,20 @@
+<script setup>
+import { ref } from "vue";
+import { RouterLink } from 'vue-router'
+const Islogged = ref(false);
+const login =()=>{
+    Islogged.value = true;
+}
+const logout =()=>{
+    Islogged.value = false;
+}
+</script>
 <template>
 
     <div class="container mx-auto">
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <a class="btn btn-ghost text-xl">Easy Show</a>
+                <RouterLink :to="{name:'home'}" class="btn btn-ghost normal-case text-xl" >Easy Show</RouterLink>
             </div>
 
             <div class="flex-none gap-2">
@@ -32,8 +43,9 @@
                     </div>
                 </div>
 
+                <button v-if="!Islogged" class="btn btn-ghost">Login</button>
 
-                <div class="dropdown dropdown-end">
+                <div v-else class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
                             <img alt="Tailwind CSS Navbar component"
