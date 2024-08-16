@@ -3,28 +3,31 @@ import { defineStore } from 'pinia';
 export const useCartStore = defineStore('cart', {
     state: () => ({
         items: [
-            {
-                name: 'test',
-                imageUrl: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp',
-                quantity: 1,
-                about: 'test description',
-                status: 'open',
-                price: 100
-            }
+
         ]
     }),
     actions: {
+        loadCart() {
+            const previousCart = localStorage.getItem('cart-data');
+            if (previousCart) {
+                this.items = JSON.parse(previousCart);
+            }
+        },
         addTocart(productData) {
             productData.quantity = 1;
 
             this.items.push(productData);
+            localStorage.setItem('cart-data', JSON.stringify(this.items));
 
         },
         updateQuantity(index, quantity) {
-            this.items[index].quantity = parseInt(quantity, 10); // Ensure quantity is an integer
+            this.items[index].quantity = parseInt(quantity, 10);
+            localStorage.setItem('cart-data', JSON.stringify(this.items));
         },
         removeItemCart(index) {
             this.items.splice(index, 1);
+            localStorage.setItem('cart-data', JSON.stringify(this.items));
+
         }
     },
     getters: {
