@@ -4,25 +4,27 @@ import Close from "@/components/icons/Close.vue";
 import { useCartStore } from "@/stores/user/cart";
 
 const cartStore = useCartStore();
+
+const changeQuantity = (event, index) => {
+  cartStore.updateQuantity(index, event.target.value);
+};
 </script>
 
 <template>
   <UserLayout>
     <h1 class="text-2xl font-bold m-4">Shopping Cart</h1>
 
-
     <div class="flex my-4">
       <div class="flex-auto bg-base-200 w-64 p-4">
-        <div v-if="cartStore.items.length === 0" :key="index">
+        <div v-if="cartStore.items.length === 0">
           Cart is empty
         </div>
-        <div v-else class="flex " v-for="(item, index) in cartStore.items">
+        <div v-else class="flex" v-for="(item, index) in cartStore.items" :key="index">
           <div class="flex-1 w-full px-10">
-            <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="" />
+            <img :src="item.imageUrl" alt="" />
           </div>
           <div class="flex-1">
             <div class="flex relative flex-col justify-between h-full">
-
               <div class="grid grid-cols-2">
                 <div>
                   <div><b>{{ item.name }}</b></div>
@@ -30,37 +32,36 @@ const cartStore = useCartStore();
                   <div>{{ item.price }}</div>
                 </div>
                 <div>
-                  <select v-model="item.quantity" class="w-1/2 p-4">
-                    <option v-for="quantity in [1, 2, 3, 4, 5]">{{ quantity }}</option>
-
+                  <select class="w-1/2 p-4" @change="changeQuantity($event, index)">
+                    <option v-for="quantity in [1, 2, 3, 4, 5]" :key="quantity" :value="quantity">
+                      {{ quantity }}
+                    </option>
                   </select>
                 </div>
                 <div @click="cartStore.removeItemCart(index)" class="absolute top-0 right-0">
-                  <Close></Close>
+                  <Close />
                 </div>
               </div>
-              <div><b>in Stock</b></div>
+              <div><b>In Stock</b></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="flex-auto bg-base-300 w-32 p-4">
-        <div class="text-xl font-bold">Summery</div>
-        <div class="m-4 divide-y ">
-          <div class="flex justify-between p-2  ">
-            <div>ราคาสินค้าทั้งหมด</div>
-            <div>100</div>
 
+      <div class="flex-auto bg-base-300 w-32 p-4">
+        <div class="text-xl font-bold">Summary</div>
+        <div class="m-4 divide-y">
+          <div class="flex justify-between p-2">
+            <div>ราคาสินค้าทั้งหมด</div>
+            <div>{{ cartStore.summaryPrice }}</div>
           </div>
-          <div class="flex justify-between p-2 ">
+          <div class="flex justify-between p-2">
             <div>ค่าส่ง</div>
             <div>0</div>
-
           </div>
-          <div class="flex justify-between p-2 ">
+          <div class="flex justify-between p-2">
             <div>รวมราคาสินค้าทั้งหมด</div>
-            <div>100</div>
-
+            <div>{{ cartStore.summaryPrice }}</div>
           </div>
         </div>
       </div>

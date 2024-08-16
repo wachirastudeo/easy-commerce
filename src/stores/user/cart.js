@@ -1,42 +1,34 @@
 import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
-
     state: () => ({
         items: [
             {
                 name: 'test',
                 imageUrl: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp',
-                quantity: 10,
-                about: 'testt',
+                quantity: 1,
+                about: 'test description',
                 status: 'open',
-                price: 100,
-                quantity: 1
+                price: 100
             }
         ]
     }),
-    getters: {
-        summeryPrice(state) {
-            return state.item.reduce((acc, item) => {
-                return acc = acc + (item.price * item.quantity);
-            }, 0);
-        }
-
-
-    },
     actions: {
         addTocart(productData) {
+
             this.items.push(productData);
 
         },
-        updateQuantiy(index, quantity) {
-            this.items[index].quantity = quantity;
-
+        updateQuantity(index, quantity) {
+            this.items[index].quantity = parseInt(quantity, 10); // Ensure quantity is an integer
         },
         removeItemCart(index) {
             this.items.splice(index, 1);
-
+        }
+    },
+    getters: {
+        summaryPrice: (state) => {
+            return state.items.reduce((total, item) => total + (item.price * item.quantity), 0);
         }
     }
-
 });
