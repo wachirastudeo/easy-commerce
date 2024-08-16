@@ -2,7 +2,7 @@
 import UserLayout from '@/layouts/UserLayout.vue';
 import { reactive } from 'vue';
 import { useCartStore } from "@/stores/user/cart";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from 'vue-router'
 
 const formData = [{
   name: 'Name',
@@ -22,16 +22,18 @@ const formData = [{
 
 const cartStore = useCartStore();
 
+const router = useRouter()
 
 const userFormData = reactive({
   name: '',
   email: '',
-  email: '',
+  address: '',
   note: ''
 
 });
 const payment = () => {
-  console.log(userFormData);
+  cartStore.checkout(userFormData);
+  router.push({ name: 'success' });
 };
 </script>
 

@@ -4,7 +4,7 @@ import ProfileView from '@/views/User/ProfileView.vue';
 import SearchView from '@/views/User/SearchView.vue';
 import CartView from '@/views/User/CartView.vue';
 import CheckoutView from '@/views/User/CheckoutView.vue';
-import SeccessView from '@/views/User/SeccessView.vue';
+import SuccessView from '@/views/User/SuccessView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,9 +25,9 @@ const router = createRouter({
       component: SearchView
     },
     {
-      path: '/seccess',
-      name: 'seccess',
-      component: SeccessView
+      path: '/success',
+      name: 'success',
+      component: SuccessView
     },
     {
       path: '/cart',
