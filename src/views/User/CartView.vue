@@ -15,21 +15,21 @@ const changeQuantity = (event, index) => {
     <h1 class="text-2xl font-bold m-4">Shopping Cart</h1>
 
     <div class="flex my-4">
-      <div class="flex-auto bg-base-200 w-64 p-4">
+      <div class="flex-auto bg-base-200 w-64 p-4 ">
         <div v-if="cartStore.items.length === 0">
           Cart is empty
         </div>
-        <div v-else class="flex" v-for="(item, index) in cartStore.items" :key="index">
+        <div v-else class="flex py-3" v-for="(item, index) in cartStore.items" :key="index">
           <div class="flex-1 w-full px-10">
             <img :src="item.imageUrl" alt="" />
           </div>
           <div class="flex-1">
             <div class="flex relative flex-col justify-between h-full">
               <div class="grid grid-cols-2">
-                <div>
-                  <div><b>{{ item.name }}</b></div>
-                  <div>{{ item.about }}</div>
-                  <div>{{ item.price }}</div>
+                <div >
+                  <div class="my-3"><b>{{ item.name }}</b></div>
+                  <div class="my-3">{{ item.about }}</div>
+                  <div class="my-3">ราคา : {{ item.price }} บาท </div>
                 </div>
                 <div>
                   <select class="w-1/2 p-4" @change="changeQuantity($event, index)">

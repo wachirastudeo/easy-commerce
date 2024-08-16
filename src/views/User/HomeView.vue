@@ -1,12 +1,17 @@
 <script setup>
 import UserLayout from '@/layouts/UserLayout.vue';
 import { useProductStore } from '@/stores/user/product';
-import  Product  from "@/components/Product.vue";
+import Product from "@/components/Product.vue";
+import { useCartStore } from '@/stores/user/cart';
 
 const productStore = useProductStore();
-const addToCart =(product)=>{
-  console.log(product)
-}
+const cartStore = useCartStore();
+
+// Function to handle adding products to cart
+const addToCart = (product) => {
+  console.log(product);
+  cartStore.addTocart(product); 
+};
 </script>
 
 <template>
@@ -20,10 +25,7 @@ const addToCart =(product)=>{
       </div>
     </div>
     
-    <!-- product -->
-     <Product :products="productStore.list" :addToCart="addToCart">
-     </Product>
-   
+    <!-- product listing -->
+    <Product :products="productStore.list" :addToCart="addToCart" />
   </UserLayout>
 </template>
-

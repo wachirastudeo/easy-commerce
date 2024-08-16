@@ -15,6 +15,7 @@ export const useCartStore = defineStore('cart', {
     }),
     actions: {
         addTocart(productData) {
+            productData.quantity = 1;
 
             this.items.push(productData);
 
