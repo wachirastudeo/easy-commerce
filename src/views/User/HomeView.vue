@@ -4,6 +4,9 @@ import { useProductStore } from '@/stores/user/product';
 import  Product  from "@/components/Product.vue";
 
 const productStore = useProductStore();
+const addToCart =(product)=>{
+  console.log(product)
+}
 </script>
 
 <template>
@@ -18,7 +21,7 @@ const productStore = useProductStore();
     </div>
     
     <!-- product -->
-     <Product :products="productStore.list">
+     <Product :products="productStore.list" :addToCart="addToCart">
      </Product>
    
   </UserLayout>

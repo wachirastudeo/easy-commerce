@@ -63,6 +63,12 @@ const changeQuantity = (event, index) => {
             <div>รวมราคาสินค้าทั้งหมด</div>
             <div>{{ cartStore.summaryPrice }}</div>
           </div>
+          <div class="flex flex-col items-end p-4 ">
+              <div >             
+                <button class="btn btn-neutral w-32  text-md" >ชำระเงิน</button>
+              </div>
+
+          </div>
         </div>
       </div>
     </div>
