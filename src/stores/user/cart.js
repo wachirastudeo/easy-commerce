@@ -2,9 +2,7 @@ import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
     state: () => ({
-        items: [
-
-        ]
+        items: []
     }),
     actions: {
         loadCart() {
@@ -14,10 +12,23 @@ export const useCartStore = defineStore('cart', {
             }
         },
         addTocart(productData) {
-            productData.quantity = 1;
 
-            this.items.push(productData);
+            const findProductIndex = this.items.findIndex(item => {
+                return item.name === productData.name;
+            });
+
+            if (findProductIndex < 0) {
+                productData.quantity = 1;
+                this.items.push(productData);
+            } else {
+                const currentItem = this.items[findProductIndex];
+                this.updateQuantity(findProductIndex, currentItem.quantity + 1);
+
+            }
+
+
             localStorage.setItem('cart-data', JSON.stringify(this.items));
+
 
         },
         updateQuantity(index, quantity) {

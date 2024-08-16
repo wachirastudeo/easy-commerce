@@ -2,9 +2,10 @@
 import {  RouterView } from 'vue-router'
 import { useCartStore } from '@/stores/user/cart';
 import { onMounted } from 'vue';
+const cartStore = useCartStore();
 
 onMounted(()=>{
-  useCartStore.loadCart()
+  cartStore.loadCart()
 })
 </script>
 

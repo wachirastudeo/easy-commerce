@@ -3,14 +3,17 @@ import UserLayout from '@/layouts/UserLayout.vue';
 import { useProductStore } from '@/stores/user/product';
 import Product from "@/components/Product.vue";
 import { useCartStore } from '@/stores/user/cart';
+import { useRouter } from 'vue-router';
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
 
+const router = useRouter()
 // Function to handle adding products to cart
 const addToCart = (product) => {
-  console.log(product);
   cartStore.addTocart(product); 
+  router.push({name:'cart'})
+
 };
 </script>
 
