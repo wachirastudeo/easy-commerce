@@ -40,7 +40,7 @@ const handleSearch =(event)=>{
     <div class="container mx-auto">
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <RouterLink :to="{ name: 'home' }" class="btn btn-ghost normal-case text-xl">Easy Show</RouterLink>
+                <RouterLink :to="{ name: 'home' }" class="btn btn-neutral normal-case text-xl">Easy Show</RouterLink>
             </div>
 
             <div class="flex-none gap-2">

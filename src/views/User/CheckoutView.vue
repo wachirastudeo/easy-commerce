@@ -38,26 +38,26 @@ const payment = () => {
 <template>
 
   <UserLayout>
-    Check out Page
+    <h1 class="text-2xl font-bold m-4">Check out</h1>
     <div class="flex py-3">
       <section class="flex-auto w-64 bg-base-200">
         <div class="py-2 px-8">
           <div v-for="form in formData" class="form-control w-full">
             <label class="label">
-              <span class="label-text">{{ form.name }}</span>
+              <span class="label-text pt-2"><b>{{ form.name }}</b></span>
             </label>
             <textarea v-if="form.field === 'address'" class="textarea textarea-bordered h-24" placeholder="Address"
               v-model="userFormData[form.field]"></textarea>
             <input v-else type="text" placeholder="Type here" class="input input-bordered input-sm w-full"
               v-model="userFormData[form.field]" />
           </div>
-          <button @click="payment" class="btn btn-neutral my-6 w-full  ">ชำระเงิน </button>
+          <button @click="payment" class="btn btn-neutral my-10 w-full  ">ชำระเงิน </button>
         </div>
-        
+
       </section>
-      <section class="flex-auto w-32 bg-slate-300 px-2 py-4">
-        <div v-for="item in cartStore.items" class="flex py-4 bg-white m-8">
-          <div class="flex-1 px-5">
+      <section class="flex-auto w-32 bg-slate-300 ">
+        <div v-for="item in cartStore.items" class="flex p-4 bg-white m-8">
+          <div class="flex-1 px-4">
             <img :src="item.imageUrl"  alt="">
           </div>
           <div class="flex-1">
@@ -70,8 +70,31 @@ const payment = () => {
               <div > <RouterLink class="btn btn-neutral" :to="{name:'cart'}"> Edit </RouterLink></div>
             </div>
           </div>
+          
         </div>
+          <div class="p-8">
+            <div class="divider"></div>
+
+            <div><b>Order summary</b></div>
+            <div class="divider"></div>
+
+            <div class="flex justify-between">
+              <div>ราคารวม</div>
+              <div>{{ cartStore.summaryPrice }}</div>
+            </div>
+            <div class="flex justify-between">
+              <div>ค่าจัดส่ง</div>
+              <div>0</div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="flex justify-between">
+              <div><b> ราคารวมทั้งหมด</b></div>
+              <div><b>{{ cartStore.summaryPrice }}</b></div>
+            </div>
+          </div>
       </section>
+      
     </div>
   </UserLayout>
 </template>
