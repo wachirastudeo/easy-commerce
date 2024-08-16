@@ -22,6 +22,11 @@ const login = () => {
 const logout = () => {
     IsloggedIn.value = false;
     localStorage.removeItem('isLoggedIn')
+    localStorage.removeItem('cart-data')
+    localStorage.removeItem('checkout-data')
+    window.location.reload()
+
+
 };
 const handleSearch =(event)=>{
     if(event.key==='Enter'){
