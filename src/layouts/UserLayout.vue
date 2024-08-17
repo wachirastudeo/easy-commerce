@@ -1,18 +1,28 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref, reactive, onMounted } from 'vue';
 import { RouterLink,useRouter } from "vue-router";
 import { useCartStore } from "@/stores/user/cart";
 const cartStore = useCartStore();
-
+const userData = reactive({
+  imageUrl: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
+})
 const route = useRouter();
 
 const IsloggedIn = ref(false);
 const searchText = ref('');
 
 onMounted(()=>{
+   
 if(localStorage.getItem('isLoggedIn')){
     IsloggedIn.value=true
+    
 }
+const savedUserProfile = localStorage.getItem('user-profile')
+    if (savedUserProfile) {
+    const userProfile = JSON.parse(savedUserProfile)
+    userData.imageUrl = userProfile.imageUrl
+  
+  }
 });
 
 const login = () => {
@@ -91,7 +101,7 @@ const handleSearch =(event)=>{
                     <ul tabindex="0"
                         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <li>
-                            <a class="justify-between"> Profile </a>
+                            <RouterLink :to="{ name: 'profile' }"><a class="justify-between"> Profile </a></RouterLink> 
                         </li>
                         <li><a @click="logout()">Logout</a></li>
                     </ul>
