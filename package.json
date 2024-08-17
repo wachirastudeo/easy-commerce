@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "apexcharts": "^3.52.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-apexcharts": "^1.6.2",
+    "vue-router": "^4.3.3",
+    "vue3-apexcharts": "^1.5.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",

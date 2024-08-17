@@ -1,10 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/User/HomeView.vue';
-import ProfileView from '@/views/User/ProfileView.vue';
-import SearchView from '@/views/User/SearchView.vue';
-import CartView from '@/views/User/CartView.vue';
-import CheckoutView from '@/views/User/CheckoutView.vue';
-import SuccessView from '@/views/User/SuccessView.vue';
+
+
+import AdminLogin from '@/views/admin/LoginView.vue';
+import AdminDashboard from '@/views/admin/DashboardView.vue';
+
+
+import AdminProductList from '@/views/admin/product/ListView.vue';
+import AdminProductUpdate from '@/views/admin/product/UpdateView.vue';
+
+
+import Home from '@/views/User/HomeView.vue';
+import Search from '@/views/User/SearchView.vue';
+import Profile from '@/views/User/ProfileView.vue';
+import Success from '@/views/User/SuccessView.vue';
+import Checkout from '@/views/User/CheckoutView.vue';
+import Cart from '@/views/User/CartView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,32 +22,49 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: ProfileView
+      component: Home
     },
     {
       path: '/search',
       name: 'search',
-      component: SearchView
+      component: Search
     },
     {
-      path: '/success',
-      name: 'success',
-      component: SuccessView
+      path: '/profile',
+      name: 'profile',
+      component: Profile
     },
     {
       path: '/cart',
       name: 'cart',
-      component: CartView
+      component: Cart
     },
     {
       path: '/checkout',
       name: 'checkout',
-      component: CheckoutView
+      component: Checkout
+    },
+    {
+      path: '/success',
+      name: 'success',
+      component: Success
+    },
+    {
+      path: '/admin/login',
+      name: 'admin-login',
+      component: AdminLogin
+    }, {
+      path: '/admin/dashboard',
+      name: 'admin-dashboard',
+      component: AdminDashboard
+    }, {
+      path: '/admin/products',
+      name: 'admin-products',
+      component: AdminProductList
+    }, {
+      path: '/admin/products/create',
+      name: 'admin-products-create',
+      component: AdminProductUpdate
     },
 
   ]
