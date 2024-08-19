@@ -1,12 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-
 import AdminLogin from '@/views/admin/LoginView.vue';
 import AdminDashboard from '@/views/admin/DashboardView.vue';
 
-
 import AdminProductList from '@/views/admin/product/ListView.vue';
 import AdminProductUpdate from '@/views/admin/product/UpdateView.vue';
+
+import AdminOrderList from '@/views/admin/order/ListView.vue';
+import AdminOrderDetail from '@/views/admin/order/DetailView.vue';
+
+import AdminUserList from '@/views/admin/user/ListView.vue';
+import AdminUserUpdate from '@/views/admin/user/UpdateView.vue';
 
 
 import Home from '@/views/User/HomeView.vue';
