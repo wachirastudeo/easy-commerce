@@ -14,18 +14,18 @@ const pageData = [
     name: 'Product',
     route: '/admin/products',
   },
-  // {
-  //   name: 'Order',
-  //   route: '/admin/orders',
-  // },
-  // {
-  //   name: 'User',
-  //   route: '/admin/users',
-  // },
-  // {
-  //   name: 'Logout',
-  //   route: '/admin/login',
-  // },
+  {
+    name: 'Order',
+    route: '/admin/orders',
+  },
+  {
+    name: 'User',
+    route: '/admin/users',
+  },
+  {
+    name: 'Logout',
+    route: '/admin/login',
+  },
 ]
 
 const currentPath = ref('')
