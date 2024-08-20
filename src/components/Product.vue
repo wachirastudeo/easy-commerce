@@ -1,8 +1,8 @@
 <script setup>
 import {defineProps} from 'vue'
 defineProps({
-    products:Array,
-    addToCart:Function
+  products: Array,
+  addToCart: Function
 })
 </script>
 

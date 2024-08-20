@@ -1,32 +1,27 @@
 import { defineStore } from 'pinia';
-
-export const useProductStore = defineStore('product', {
-  // Using the options API
+import { collection, query, getDocs } from "firebase/firestore";
+import { db } from '@/firebase';
+export const useProductStore = defineStore('user-product', {
   state: () => ({
-    list: [
-      {
-        name: 'test',
-        imageUrl: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp',
-        quantity: 10,
-        about: 'testt',
-        status: 'open',
-        price: 50,
-      },
-      {
-        name: 'test123',
-        imageUrl: 'https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp',
-        quantity: 10,
-        about: 'testt 123',
-        status: 'open',
-        price: 250,
-      },
-    ],
-    loaded: false,
+    list: [],
+    loaded: false
   }),
   actions: {
-    filterProduct(searchText) {
-      return this.list.filter(product => product.name.includes(searchText));
+    async loadProduct() {
+      let productsCol = query(collection(db, 'products'));
+      const productSnapshot = await getDocs(productsCol);
+      const products = productSnapshot.docs.map(doc => doc.data());
+
+      if (products.length > 0) {
+        this.list = products;
+        this.loaded = true;
+      }
+    },
+    filterProducts(searchName) {
+      if (!this.loaded) {
+        this.loadProduct();
+      }
+      return this.list.filter(product => product.name.includes(searchName));
     }
   }
-
 });
