@@ -2,13 +2,18 @@
 import { ref, reactive, onMounted } from 'vue';
 import { RouterLink,useRouter } from "vue-router";
 import { useCartStore } from "@/stores/user/cart";
+import {useAccountStore  } from "@/stores/account"
+
+
+// ระบุ social provider ที่จะใช้ login
+
 const cartStore = useCartStore();
+const accountStore =useAccountStore();
 const userData = reactive({
   imageUrl: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
 })
 const route = useRouter();
 
-const IsloggedIn = ref(false);
 const searchText = ref('');
 
 onMounted(()=>{
@@ -25,15 +30,19 @@ const savedUserProfile = localStorage.getItem('user-profile')
   }
 });
 
-const login = () => {
-    IsloggedIn.value = true;
-    localStorage.setItem('isLoggedIn',true);
+const login = async() => {
+
+    try {
+        await accountStore.signInWithGoogle();
+    } catch (error) {
+        
+    }
+
 };
-const logout = () => {
-    IsloggedIn.value = false;
-    localStorage.removeItem('isLoggedIn')
-    localStorage.removeItem('cart-data')
-    localStorage.removeItem('checkout-data')
+const logout = async() => {
+    await accountStore.logout();
+    // localStorage.removeItem('cart-data')
+    // localStorage.removeItem('checkout-data')
     window.location.reload()
 
 
@@ -89,7 +98,7 @@ const handleSearch =(event)=>{
                     </div>
                 </div>
 
-                <button v-if="!IsloggedIn" @click="login()" class="btn btn-ghost">Login</button>
+                <button v-if="!accountStore.isLoggedIn" @click="login()" class="btn btn-ghost">Login</button>
 
                 <div v-else class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">

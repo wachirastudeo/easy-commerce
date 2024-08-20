@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore/lite';
+// ทำการ import library ของ Firebase Auth
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
 
 
 const firebaseConfig = {
@@ -16,6 +18,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 connectFirestoreEmulator(db, '127.0.0.1', 8080);
+// ทำการเพิ่ม Firebase Auth เข้ามา
+
+const auth = getAuth();
+connectAuthEmulator(auth, 'http://127.0.0.1:9099');
 export {
     db,
+    auth
 };
