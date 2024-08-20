@@ -3,6 +3,7 @@ import { auth } from '@/firebase';
 
 import {
     GoogleAuthProvider,
+    onAuthStateChanged,
     signInWithPopup,
     signOut
 } from 'firebase/auth';
@@ -17,11 +18,24 @@ export const useAccountStore = defineStore('account', {
         user: {}
     }),
     actions: {
+        async checkAuthState() {
+            return new Promise((resolve) => {
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        this.user = user;
+                        this.isLoggedIn = true;
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                });
+            });
+        },
         async signInWithGoogle() {
             try {
                 const result = await signInWithPopup(auth, provider);
-                this.isLoggedIn = true;
                 this.user = result.user;
+                this.isLoggedIn = true;
 
             } catch (error) {
 

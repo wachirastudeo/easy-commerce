@@ -11,6 +11,7 @@ import AdminOrderDetail from '@/views/admin/order/DetailView.vue';
 
 import AdminUserList from '@/views/admin/user/ListView.vue';
 import AdminUserUpdate from '@/views/admin/user/UpdateView.vue';
+import { useAccountStore } from '@/stores/account';
 
 
 import Home from '@/views/User/HomeView.vue';
@@ -100,5 +101,12 @@ const router = createRouter({
 
   ]
 });
+router.beforeEach(async (to, from, next) => {
+  // เพิ่มเรียก checkAuthState ขึ้นมาเพื่อ update store ให้ user ถูก update
+  const userAccountStore = useAccountStore();
+  await userAccountStore.checkAuthState();
 
+  // ทำการแสดง route ออกไป
+  next();
+});
 export default router;
