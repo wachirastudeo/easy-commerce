@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "apexcharts": "^3.52.0",
+    "firebase": "^10.13.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-apexcharts": "^1.6.2",
