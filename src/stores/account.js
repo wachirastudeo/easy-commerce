@@ -56,12 +56,10 @@ export const useAccountStore = defineStore('account', {
                 switch (error.code) {
                     case 'auth/invalid-email':
                         throw new Error('Email ไม่ถูกต้อง');
-
-
+                    case 'auth/wrong-password':
+                        throw new Error('Wrong password');
                     default:
-                        throw new Error('มีปัญหาเกี่ยวกับการ login');
-
-
+                        throw new Error('Login invalid');
                 }
 
 
