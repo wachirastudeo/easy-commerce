@@ -25,6 +25,9 @@ export const useAccountStore = defineStore('account', {
                     if (user) {
                         this.user = user;
                         this.isLoggedIn = true;
+                        if (this.user.email === 'admin@test.com') {
+                            this.isAdmin = true;
+                        }
                         resolve(true);
                     } else {
                         resolve(false);

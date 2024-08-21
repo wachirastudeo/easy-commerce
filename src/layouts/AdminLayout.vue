@@ -2,9 +2,19 @@
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { useAccountStore} from '@/stores/account'
+const accountStore = useAccountStore();
 const route = useRoute()
+const logout= async()=>{
 
+  try {
+    await accountStore.logout();
+    route.push({name:'login'})
+    
+  } catch (error) {
+    
+  }
+}
 const pageData = [
   {
     name: 'Dashboard',
@@ -21,11 +31,8 @@ const pageData = [
   {
     name: 'User',
     route: '/admin/users',
-  },
-  {
-    name: 'Logout',
-    route: '/admin/login',
-  },
+  }
+ 
 ]
 
 const currentPath = ref('')
@@ -50,6 +57,10 @@ currentPath.value = route.path
             {{ page.name }}
           </RouterLink>
         </li>
+        <li>
+          <RouterLink @="logout">Logout</RouterLink>
+        </li>
+        
       </ul>
     </div>
   </div>

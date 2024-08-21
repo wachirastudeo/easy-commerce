@@ -57,7 +57,7 @@ const router = createRouter({
     //admin site 
     {
       path: '/admin/login',
-      name: 'admin-login',
+      name: 'login',
       component: AdminLogin
     }, {
       path: '/admin/dashboard',
@@ -103,10 +103,20 @@ const router = createRouter({
 });
 router.beforeEach(async (to, from, next) => {
   // เพิ่มเรียก checkAuthState ขึ้นมาเพื่อ update store ให้ user ถูก update
-  const userAccountStore = useAccountStore();
-  await userAccountStore.checkAuthState();
+  const accountStore = useAccountStore();
+  await accountStore.checkAuthState();
+
+  if (to.name.includes('admin') && !accountStore.isAdmin) {
+    next({ name: 'home' });
+  } else if (to.name === 'login' && accountStore.isAdmin) {
+
+    next({ name: 'admin-dashboard' });
+
+  } else {
+    next();
+
+  }
 
   // ทำการแสดง route ออกไป
-  next();
 });
 export default router;
