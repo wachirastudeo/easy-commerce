@@ -1,5 +1,15 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { ref } from 'vue'
+import { useAccountStore } from '@/stores/account';
+
+const email = ref('');
+const password = ref('');
+const login=()=>{
+  console.log(email.value)
+  console.log(password.value)
+
+}
 </script>
 
 <template>
@@ -14,6 +24,7 @@ import { RouterLink } from 'vue-router';
                 >Email Id</span
               ></label
             ><input
+              v-model="email"
               type="emailId"
               placeholder=""
               class="input input-bordered w-full"
@@ -26,6 +37,7 @@ import { RouterLink } from 'vue-router';
                 >Password</span
               ></label
             ><input
+              v-model="password"
               type="password"
               placeholder=""
               class="input input-bordered w-full"
@@ -34,8 +46,8 @@ import { RouterLink } from 'vue-router';
           </div>
         </div>
         <p class="text-center text-error mt-8"></p>
-        <RouterLink to="/admin/dashboard" class="btn mt-2 w-full btn-primary"
-          >Login</RouterLink
+        <button  @click="login" class="btn mt-2 w-full btn-primary"
+          >Login</button
         >
       </div>
     </div>
