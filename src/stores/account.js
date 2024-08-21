@@ -43,14 +43,27 @@ export const useAccountStore = defineStore('account', {
             }
 
         },
-        async singInWithAdmin() {
+        async singInWithAdmin(email, password) {
             try {
                 const result = await signInWithEmailAndPassword(auth, email, password);
                 this.isLoggedIn = true;
-                this.user = result.user;
                 this.isAdmin = true;
 
+                this.user = result.user;
+
             } catch (error) {
+                console.log('error', error);
+                switch (error.code) {
+                    case 'auth/invalid-email':
+                        throw new Error('Email ไม่ถูกต้อง');
+
+
+                    default:
+                        throw new Error('มีปัญหาเกี่ยวกับการ login');
+
+
+                }
+
 
             }
         },
